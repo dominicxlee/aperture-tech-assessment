@@ -1,0 +1,6 @@
+{
+  "selenium": {
+    "browser": "chrome",
+    "defaultTimeout": 10
+  }
+}
