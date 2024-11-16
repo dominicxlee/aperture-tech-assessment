@@ -2,6 +2,7 @@
 
 A short summary of the feature
 
+@RequiresProductsAddedToCart
 Scenario: Filling out checkout details
    Given the user is on the checkout page
    When the user enters "John" as the first name

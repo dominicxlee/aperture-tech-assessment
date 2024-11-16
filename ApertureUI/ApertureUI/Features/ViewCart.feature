@@ -1,8 +1,10 @@
 ﻿Feature: ViewCart
 
-@tag1
+@RequiresLogin
 Scenario: Viewing selected products in the cart
-   Given the user has added "Product A" and "Product B" to the cart
+   Given the user has added "sauce-labs-bolt-t-shirt" to the cart
+   And the user has added "sauce-labs-fleece-jacket" to the cart
    When the user clicks the cart icon
-   Then the cart page displays "Product A" and "Product B"
+   Then the cart page displays "sauce-labs-bolt-t-shirt"
+   And the cart page displays "sauce-labs-fleece-jacket"
 

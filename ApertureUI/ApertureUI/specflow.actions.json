@@ -1,6 +1,6 @@
 {
   "selenium": {
     "browser": "chrome",
-    "defaultTimeout": 10
+    "defaultTimeout": 3
   }
 }

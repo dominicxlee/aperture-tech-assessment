@@ -22,6 +22,19 @@ namespace ApertureUI.Features.Hooks
             loginPage.ClickLogin();
         }
 
+        [BeforeScenario("RequiresProductsAddedToCart")]
+        public static void AddToCartAndContinue(LoginPage loginPage, InventoryPage inventoryPage, CartPage cartPage)
+        {
+            PerformLogin(loginPage);
+
+            // add products to cart using invntoryPage.AddProduct("some-product")
+            inventoryPage.AddProductToCart("sauce-labs-fleece-jacket");
+            inventoryPage.AddProductToCart("sauce-labs-onesie");
+            inventoryPage.GoToCart();
+
+            cartPage.ClickCheckout();
+        }
+
 
     }
 }
