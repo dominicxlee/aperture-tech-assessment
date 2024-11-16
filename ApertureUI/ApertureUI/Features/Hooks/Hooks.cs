@@ -13,6 +13,15 @@ namespace ApertureUI.Features.Hooks
             loginPage.GoTo();
         }
 
+        [BeforeScenario("RequiresLogin")]
+        public void PerformLogin(LoginPage loginPage)
+        {
+            loginPage.GoTo();
+            loginPage.EnterUsername("standard_user");
+            loginPage.EnterPassword("secret_sauce");
+            loginPage.ClickLogin();
+        }
+
 
     }
 }
