@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using SpecFlow.Actions.Selenium;
 
 namespace ApertureUI.PageObjects
@@ -18,12 +13,12 @@ namespace ApertureUI.PageObjects
         }
 
         private static string InventoryPageUrl => "https://www.saucedemo.com/inventory.html";
+        private IWebElement Cart => _browserInteractions.WaitAndReturnElement(By.CssSelector("[data-test='shopping-cart-badge']"));
 
 
         public void AddProductToCart(string productName)
         {
-            // "add-to-cart-sauce-labs-bolt-t-shirt"
-            IWebElement addToCartBtn = _browserInteractions.WaitAndReturnElement(By.Id(productName));
+            IWebElement addToCartBtn = _browserInteractions.WaitAndReturnElement(By.Id("add-to-cart-" + productName));
             addToCartBtn.ClickWithRetry();
         }
 
@@ -37,5 +32,11 @@ namespace ApertureUI.PageObjects
             return _browserInteractions.GetUrl().Equals(InventoryPageUrl);
         }
 
+        public string GetCartCount()
+        {
+            return Cart.Text.Trim();
+        }
+
     }
 }
+    

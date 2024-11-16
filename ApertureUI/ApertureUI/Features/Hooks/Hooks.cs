@@ -8,13 +8,13 @@ namespace ApertureUI.Features.Hooks
     {
 
         [BeforeScenario]
-        public void BeforeScenario(LoginPage loginPage)
+        public static void BeforeScenario(LoginPage loginPage)
         {
             loginPage.GoTo();
         }
 
         [BeforeScenario("RequiresLogin")]
-        public void PerformLogin(LoginPage loginPage)
+        public static void PerformLogin(LoginPage loginPage)
         {
             loginPage.GoTo();
             loginPage.EnterUsername("standard_user");
