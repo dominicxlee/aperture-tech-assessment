@@ -3,7 +3,7 @@ using SpecFlow.Actions.Selenium;
 
 namespace ApertureUI.PageObjects
 {
-    internal class InventoryPage
+    public class InventoryPage
     {
         private readonly IBrowserInteractions _browserInteractions;
 
@@ -14,6 +14,7 @@ namespace ApertureUI.PageObjects
 
         private static string InventoryPageUrl => "https://www.saucedemo.com/inventory.html";
         private IWebElement Cart => _browserInteractions.WaitAndReturnElement(By.CssSelector("[data-test='shopping-cart-badge']"));
+        private IWebElement CartLink => _browserInteractions.WaitAndReturnElement(By.CssSelector("[data-test='shopping-cart-link']"));
 
 
         public void AddProductToCart(string productName)
@@ -35,6 +36,11 @@ namespace ApertureUI.PageObjects
         public string GetCartCount()
         {
             return Cart.Text.Trim();
+        }
+
+        public void GoToCart()
+        {
+            CartLink.ClickWithRetry();
         }
 
     }
