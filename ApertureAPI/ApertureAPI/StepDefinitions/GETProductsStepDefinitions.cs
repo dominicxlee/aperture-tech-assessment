@@ -7,52 +7,35 @@ using Xunit;
 [Binding]
 public class GETProductsStepDefinitions
 {
-    private string _baseUrl;
-    private RestResponse _response;
     private JArray _products;
-    private JObject _product;
 
-    [Given(@"the base URL is ""(.*)""")]
-    public void GivenTheBaseUrlIs(string baseUrl)
-    {
-        _baseUrl = baseUrl;
-    }
+    private readonly ApiContext _context;
 
-    [When(@"I send a GET request to the endpoint")]
-    public void WhenISendAGETRequestToTheEndpoint()
+    public GETProductsStepDefinitions(ApiContext context)
     {
-        var client = new RestClient(_baseUrl);
-        var request = new RestRequest("", Method.Get);
-        _response = client.Execute(request);
-        LogResponseDetails();
-        TryParseResponseAsArray();
+        _context = context;
     }
 
     [When(@"I send a GET request to the endpoint with product ID (.*)")]
     public void WhenISendAGETRequestToTheEndpointWithProductID(int productId)
     {
-        var client = new RestClient($"{_baseUrl}/{productId}");
+        var client = new RestClient($"{_context.baseUrl}/{productId}");
         var request = new RestRequest("", Method.Get);
-        _response = client.Execute(request);
+        _context.Response = client.Execute(request);
         LogResponseDetails();
-        TryParseResponseAsObject();
-    }
-
-    [Then(@"the response code should be (.*)")]
-    public void ThenTheResponseCodeShouldBe(int statusCode)
-    {
-        Assert.Equal((HttpStatusCode)statusCode, _response.StatusCode);
     }
 
     [Then(@"the response should contain a list of products")]
     public void ThenTheResponseShouldContainAListOfProducts()
     {
+        TryParseResponseAsArray();
         Assert.True(_products != null && _products.Count > 0, "The response does not contain a valid list of products.");
     }
 
     [Then(@"the response should contain a product with id (.*)")]
     public void ThenTheResponseShouldContainAProductWithId(int id)
     {
+        TryParseResponseAsArray();
         var product = _products?.FirstOrDefault(p => (int)p["id"] == id);
         Assert.NotNull(product);
     }
@@ -60,6 +43,7 @@ public class GETProductsStepDefinitions
     [Then(@"the product should have a (.*)")]
     public void ThenTheProductShouldHaveA(string field)
     {
+        TryParseResponseAsArray();
         Assert.All(_products, product =>
         {
             Assert.True(product[field] != null && !string.IsNullOrEmpty(product[field].ToString()),
@@ -70,28 +54,20 @@ public class GETProductsStepDefinitions
     [Then(@"the response should not contain details of a product")]
     public void ThenTheResponseShouldNotContainDetailsOfAProduct()
     {
-        Assert.Empty(_response.Content);
-    }
-
-
-    [Then(@"the error message should contain ""(.*)""")]
-    public void ThenTheErrorMessageShouldContain(string expectedMessage)
-    {
-        var errorMessage = _response.Content;
-        Assert.Contains(expectedMessage, errorMessage, StringComparison.OrdinalIgnoreCase);
+        Assert.Empty(_context.Response.Content);
     }
 
     private void LogResponseDetails()
     {
-        Console.WriteLine($"Status Code: {_response.StatusCode}");
-        Console.WriteLine($"Response Body: {_response.Content}");
+        Console.WriteLine($"Status Code: {_context.Response.StatusCode}");
+        Console.WriteLine($"Response Body: {_context.Response.Content}");
     }
 
     private void TryParseResponseAsArray()
     {
         try
         {
-            _products = JArray.Parse(_response.Content);
+            _products = JArray.Parse(_context.Response.Content);
         }
         catch
         {
@@ -99,15 +75,4 @@ public class GETProductsStepDefinitions
         }
     }
 
-    private void TryParseResponseAsObject()
-    {
-        try
-        {
-            _product = JObject.Parse(_response.Content);
-        }
-        catch
-        {
-            _product = null;
-        }
-    }
 }

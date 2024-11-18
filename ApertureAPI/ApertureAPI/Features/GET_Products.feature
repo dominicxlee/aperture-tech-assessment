@@ -20,7 +20,7 @@
     Examples:
       | id  |
       | 1   |
-      | 5 |
+      | 5   |
       | 10  |
 
   Scenario: Verify behavior for an invalid endpoint
