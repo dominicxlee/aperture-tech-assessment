@@ -1,14 +1,14 @@
-﻿Feature: PUT request to update a product
+﻿Feature: DELETE request to remove a product
 
   As a user of the API
-  I want to send a PUT request to update a product
+  I want to send a DELETE request to remove a product
   So that I can verify that the product details are returned with the same ID, but nothing is actually updated in the database.
 
   Background:
     Given the base URL is "https://fakestoreapi.com/products/"
 
-  Scenario Outline: Verifying the updated product details returned by PUT request
-    Given I send a PUT request to update the product with the following details:
+  Scenario Outline: Verifying the removed product details returned by DELETE request
+    Given I send a DELETE request to remove the product with the following details:
       | title   | price   | description   | image   | category   | id   |
       | <title> | <price> | <description> | <image> | <category> | <id> |
     Then the response code should be 200

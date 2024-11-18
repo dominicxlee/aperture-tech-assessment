@@ -6,6 +6,13 @@
       | title        | price   | description     | image            | category   |
       | <title>      | <price> | <description>   | <image>          | <category> |
     Then the response code should be 200
+    And the response should contain the product with the following details:
+      | field       | value |
+      | title       |       |
+      | price       |       |
+      | description |       |
+      | image       |       |
+      | category    |       |
 
     Examples:
       | title         | price | description       | image                 | category   |

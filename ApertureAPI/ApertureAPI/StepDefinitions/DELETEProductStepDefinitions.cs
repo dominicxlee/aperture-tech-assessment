@@ -4,17 +4,17 @@ using RestSharp;
 namespace ApertureAPI.StepDefinitions
 {
     [Binding]
-    public class PUTProductStepDefinitions
+    public class DELETEProductStepDefinitions
     {
         private readonly ApiContext _context;
 
-        public PUTProductStepDefinitions(ApiContext context)
+        public DELETEProductStepDefinitions(ApiContext context)
         {
             _context = context;
         }
 
-        [Given(@"I send a PUT request to update the product with the following details:")]
-        public void GivenISendAPUTRequestToUpdateTheProductWithTheFollowingDetails(Table table)
+        [Given(@"I send a DELETE request to remove the product with the following details:")]
+        public void GivenISendADELETERequestToRemoveTheProductWithTheFollowingDetails(Table table)
         {
             var productData = new JObject();
             var id = "";
@@ -29,7 +29,7 @@ namespace ApertureAPI.StepDefinitions
             }
 
             var client = new RestClient(_context.baseUrl);
-            var request = new RestRequest(id, Method.Put);
+            var request = new RestRequest(id, Method.Delete);
             request.AddJsonBody(productData);
 
             _context.Response = client.Execute(request);

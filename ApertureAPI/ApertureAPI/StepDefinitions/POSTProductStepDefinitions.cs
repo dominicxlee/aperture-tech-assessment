@@ -1,8 +1,5 @@
-using System;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using System.Net;
-using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Infrastructure;
 
 namespace ApertureAPI.StepDefinitions
@@ -31,7 +28,7 @@ namespace ApertureAPI.StepDefinitions
                 productData["description"] = row["description"];
                 productData["image"] = row["image"];
                 productData["category"] = row["category"];
-
+                    
             }
 
             var client = new RestClient(_context.baseUrl);
