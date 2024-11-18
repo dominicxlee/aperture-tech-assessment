@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aperture-tech-assessment", "aperture-tech-assessment.csproj", "{709608DB-3C0E-4AD8-950C-05B1E4482019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApertureUI", "..\ApertureUI\ApertureUI\ApertureUI.csproj", "{6CACCCA2-DE52-403E-A476-F607A7CB79A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApertureAPI", "..\ApertureAPI\ApertureAPI\ApertureAPI.csproj", "{DB16C879-AB0A-4CD8-9502-3611A65A9956}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{709608DB-3C0E-4AD8-950C-05B1E4482019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709608DB-3C0E-4AD8-950C-05B1E4482019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709608DB-3C0E-4AD8-950C-05B1E4482019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709608DB-3C0E-4AD8-950C-05B1E4482019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CACCCA2-DE52-403E-A476-F607A7CB79A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CACCCA2-DE52-403E-A476-F607A7CB79A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CACCCA2-DE52-403E-A476-F607A7CB79A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CACCCA2-DE52-403E-A476-F607A7CB79A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB16C879-AB0A-4CD8-9502-3611A65A9956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB16C879-AB0A-4CD8-9502-3611A65A9956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB16C879-AB0A-4CD8-9502-3611A65A9956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB16C879-AB0A-4CD8-9502-3611A65A9956}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
