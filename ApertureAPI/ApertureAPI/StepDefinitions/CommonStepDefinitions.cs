@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using Newtonsoft.Json.Linq;
 using RestSharp;
+using TechTalk.SpecFlow.Infrastructure;
 
 
-    [Binding]
+[Binding]
     public class CommonStepDefinitions
     {
         private readonly ApiContext _context;
+    private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
 
-        public CommonStepDefinitions(ApiContext context)
+    public CommonStepDefinitions(ApiContext context, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             _context = context;
-        }
+            _specFlowOutputHelper = specFlowOutputHelper;
+    }
 
         [Given(@"the base URL is ""(.*)""")]
         public void GivenTheBaseUrlIs(string baseUrl)
@@ -40,8 +39,8 @@ using RestSharp;
 
         private void LogResponseDetails()
         {
-            Console.WriteLine($"Status Code: {_context.Response.StatusCode}");
-            Console.WriteLine($"Response Body: {_context.Response.Content}");
+        _specFlowOutputHelper.WriteLine($"Status Code: {_context.Response.StatusCode}");
+        _specFlowOutputHelper.WriteLine($"Response Body: {_context.Response.Content}");
         }
 
         [Then(@"the error message should contain ""(.*)""")]
@@ -51,5 +50,30 @@ using RestSharp;
             Assert.Contains(expectedMessage, errorMessage, StringComparison.OrdinalIgnoreCase);
         }
 
+    [Then(@"the response should contain the product with the following details:")]
+    public void ThenTheResponseShouldContainTheProductWithTheFollowingDetails(Table table)
+    {
+        var responseJson = JObject.Parse(_context.Response.Content);
+
+        foreach (var row in table.Rows)
+        {
+            var field = row["field"];
+
+            // Check if the field exists
+            var property = responseJson.Property(field);
+
+            // Assert that the field exists
+            Assert.True(property != null, $"Field '{field}' is missing from the response.");
+
+            // If the field is 'id', ensure the value is correct
+            if (field == "id")
+            {
+                var actualValue = property?.Value.ToString();
+                var expectedValue = row["value"];
+                Assert.Equal(expectedValue, actualValue); // Assert that id is correct
+            }
+        }
     }
+
+}
 
