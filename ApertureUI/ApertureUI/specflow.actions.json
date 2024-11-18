@@ -1,6 +1,9 @@
 {
   "selenium": {
     "browser": "chrome",
+    "arguments": [
+      "--start-maximized"
+    ],
     "defaultTimeout": 3
   }
 }
