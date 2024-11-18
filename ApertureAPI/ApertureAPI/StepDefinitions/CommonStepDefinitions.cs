@@ -43,6 +43,13 @@ namespace ApertureAPI.StepDefinitions
             _context.Response.IsSuccessful.Should().BeTrue(); // Asserts that the response indicates success
         }
 
+        // Step definition for verifying that the request failed
+        [Then(@"the request should fail")]
+        public void ThenTheRequestShouldFail()
+        {
+            _context.Response.IsSuccessful.Should().BeFalse(); // Asserts that the response indicates failure
+        }
+
         // Helper method to log response details
         private void LogResponseDetails()
         {

@@ -15,8 +15,8 @@ namespace ApertureAPI.StepDefinitions
         }
 
         // Step definition for sending a DELETE request to remove a product
-        [Given(@"I send a DELETE request to remove the product with the following details:")]
-        public void GivenISendADELETERequestToRemoveTheProductWithTheFollowingDetails(Table table)
+        [When(@"I send a DELETE request to remove the product with the following details:")]
+        public void WhenISendADELETERequestToRemoveTheProductWithTheFollowingDetails(Table table)
         {
             var productData = new JObject(); // Creates a JSON object to hold product data
             var id = ""; // Variable to store the product ID
